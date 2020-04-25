@@ -1,4 +1,4 @@
-const SERVER_URI = "ws://" + window.document.location.host + '/';
+const SERVER_URI = "wss://" + window.document.location.host + '/';
 const CELL_WIDTH = 32;
 const BOARD_SIZE = 8;
 const BLACK = 'black';
