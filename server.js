@@ -222,6 +222,7 @@ var wss = new WebSocketServer({server:server});
 
 wss.on('connection', function (conn) {
   conn.on('close', function () {
+    waiting = waiting.filter((e, i) => e.conn != conn);
     let battle = connections.get(conn);
     if (battle == undefined)
       return;
