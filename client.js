@@ -80,13 +80,14 @@ function boardClicked(e, sock) {
 
 function hideAllBlock() {
   document.getElementById("nameinput-block").style.display = "none";
+  document.getElementById("spinner-block").style.display = "none";
   document.getElementById("board-block").style.display = "none";
 }
 
 function startNameInput() {
   hideAllBlock();
   document.getElementById("nameinput-block").style.display = "block";
-  noticeStatus("Input your name.");
+  noticeStatus("Welcome");
 }
 
 function updateTurn() {
@@ -129,6 +130,7 @@ function startButtonClicked() {
     player_name = "anonymous";
   noticeStatus("Finding player...");
   hideAllBlock();
+  document.getElementById("spinner-block").style.display = "block";
 
   let sock = new WebSocket(SERVER_URI);
 
@@ -140,7 +142,7 @@ function startButtonClicked() {
 
   sock.onclose = function(e) {
     if (is_playing)
-      noticeAndReset("Server error");
+      noticeAndReset("Connection closed :(");
   };
 
   sock.onopen = function(e) {
@@ -162,7 +164,7 @@ function startButtonClicked() {
 
       case "closed":
         sock.close();
-        noticeAndReset("Connection closed:(");
+        noticeAndReset("This match has been canceled :(");
         break;
 
       case "matched":
